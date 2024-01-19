@@ -29,6 +29,7 @@ export default function UserList() {
   const userRef = useRef<{
     openMoal: (type: IAction, data?: User.UserItem) => void
   }>()
+
   // 定义表单
   const myformRef = useRef<{
     setFormData: (data: FormItem.UserFormItem) => void

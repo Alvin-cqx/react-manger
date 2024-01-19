@@ -185,4 +185,8 @@ export namespace Menu {
     buttons?: MenuItem[]
     children?: MenuItem[]
   }
+  // 修改用户参数
+  export interface EditParams extends CreateParams {
+    _id: string
+  }
 }

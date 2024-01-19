@@ -88,8 +88,8 @@ export default function MenuList() {
     }
   ]
   // 创建部门弹窗
-  const deptRef = useRef<{
-    openMoal: (type: IAction, data?: Dept.DeptItem | { parentId: string }) => void
+  const menuRef = useRef<{
+    openMoal: (type: IAction, data?: Menu.MenuItem | { parentId: string }) => void
   }>()
   // 获取部门列表
   const getMenuListData = async () => {
@@ -102,20 +102,16 @@ export default function MenuList() {
     getMenuListData()
   }
   useEffect(() => {
-    // const params = {
-    //   deptName: form.getFieldValue('deptName')
-    // }
-    // console.log(params, 'form')
+  
     getMenuListData()
   }, [])
   // 创建部门
   const handeCreate = () => {
-    deptRef.current?.openMoal('create')
-    getMenuListData()
+    menuRef.current?.openMoal('create')
   }
   // 创建子部门
   const handeSubCreact = (id: string) => {
-    deptRef.current?.openMoal('create', { parentId: id })
+    menuRef.current?.openMoal('create', { parentId: id })
   }
   // 删除部门
   const handleDelete = (id: string) => {
@@ -131,7 +127,7 @@ export default function MenuList() {
   }
   // 编辑部门
   const handeEdit = (record: Menu.MenuItem) => {
-    deptRef.current?.openMoal('edit', record)
+    menuRef.current?.openMoal('edit', record)
   }
   return (
     <div>
@@ -174,7 +170,7 @@ export default function MenuList() {
         <Table bordered rowKey={'_id'} columns={columns} dataSource={deptList} pagination={false}></Table>
       </div>
       {/* 创建菜单 */}
-      <CreateMenu></CreateMenu>
+      <CreateMenu menuRef={menuRef} update={getMenuListData}></CreateMenu>
     </div>
   )
 }

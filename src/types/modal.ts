@@ -24,14 +24,17 @@ export interface CreateDeptProps {
 
 // 创建菜单弹窗
 export interface CreateMenuProps {
-  MRef: MutableRefObject<{ openMoal: (type: IAction, data?: Menu.MenuItem) => void } | undefined>
+  menuRef: MutableRefObject<{ openMoal: (type: IAction, data?: Menu.MenuItem) => void } | undefined>
   update: () => void
 }
+
 interface myformRefPorps {
   setFormData: (data: FormItem.UserFormItem) => void
   getFieldsForm: FormInstance<any>
   pickTypeChange?: (val: IAction) => void
 }
+
+
 export interface FormProps {
   myformRef: MutableRefObject<myformRefPorps | undefined>
   searchItem?: FormItem.UserFormItem
