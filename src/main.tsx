@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 // 路由1
-// import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom'
 // // eslint-disable-next-line react-refresh/only-export-components
 // function ReactDemo() {
 //   return <h2>欢迎学习react</h2>

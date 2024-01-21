@@ -80,3 +80,21 @@ export const deleteDept = (params: Dept.DelParams) => {
 export const getMenuList = (params: Menu.Params = {}) => {
   return request.get<Menu.MenuItem[]>('/menu/list', params)
 }
+
+// 创建菜单
+export const creatMenu = (params: Menu.CreateParams) => {
+  return request.post('/menu/create', params)
+}
+// 编辑菜单
+export const editMenu = (params: Menu.EditParams) => {
+  return request.post('/menu/edit', params)
+}
+// 删除菜单
+export const deleteMenu = (params: Menu.DelParams) => {
+  return request.post('/menu/delete', params)
+}
+
+// // 获取用户权限列表
+export const getPermissionList = () => {
+  return request.get<{ buttonList: string[]; menuList: Menu.MenuItem }>('/users/getPermissionList')
+}

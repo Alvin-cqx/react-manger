@@ -178,6 +178,7 @@ export namespace Menu {
     path?: string
     component?: string
     creatTime?: string
+    orderBy?:number
   }
   // 菜单对象
   export interface MenuItem extends CreateParams {
@@ -188,5 +189,9 @@ export namespace Menu {
   // 修改用户参数
   export interface EditParams extends CreateParams {
     _id: string
+  }
+
+  export interface DelParams{
+    _id:string
   }
 }

@@ -28,6 +28,12 @@ export interface CreateMenuProps {
   update: () => void
 }
 
+
+// refProps类型
+export interface refProps<T=Menu.MenuItem> {
+  menuRef: MutableRefObject<{ openMoal: (type: IAction, data?:T) => void } | undefined>
+  update: () => void
+}
 interface myformRefPorps {
   setFormData: (data: FormItem.UserFormItem) => void
   getFieldsForm: FormInstance<any>

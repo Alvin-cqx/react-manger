@@ -1,7 +1,7 @@
 import { Form, Input, Button, Space, Col, Row, Table, Modal, message, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form'
 import { useState, useEffect, useRef } from 'react'
-import { getMenuList, deleteDept } from '@/api/api'
+import { getMenuList, deleteMenu } from '@/api/api'
 import { Dept, Menu } from '@/types/api'
 import CreateMenu from './CreateMenu'
 import { IAction } from '@/types/modal'
@@ -12,8 +12,8 @@ export default function MenuList() {
   const columns: ColumnsType<Menu.MenuItem> = [
     {
       title: '菜单名称',
-      dataIndex: 'menunName',
-      key: 'menunName'
+      dataIndex: 'menuName',
+      key: 'menuName'
     },
     {
       title: '菜单图标',
@@ -49,8 +49,20 @@ export default function MenuList() {
     },
     {
       title: '创建时间',
-      dataIndex: 'creatTime',
-      key: 'creatTime'
+      dataIndex: 'createTime',
+      key: 'createTime'
+    },
+    {
+      title: '状态',
+      dataIndex: 'menuState',
+      key: 'menuState',
+      render:(text, record)=>{
+   
+        return {
+          1: '正常',
+          2: '禁用'
+        }[record.menuState]
+      }
     },
     {
       title: '操作',
@@ -59,14 +71,15 @@ export default function MenuList() {
       width: 200,
       render: (text, record) => (
         <Space size='middle'>
-          <Button
+          {record.children?.length?<Button
             type='text'
             onClick={() => {
-              handeSubCreact(record._id)
+              handeSubCreact(record._id,record.children?.length)
             }}
           >
             新增
-          </Button>
+          </Button>:''}
+          
           <Button
             type='text'
             onClick={() => {
@@ -77,8 +90,9 @@ export default function MenuList() {
           </Button>
           <Button
             type='text'
+            danger
             onClick={() => {
-              handleDelete(record._id)
+              handleDelete(record)
             }}
           >
             删除
@@ -89,7 +103,7 @@ export default function MenuList() {
   ]
   // 创建部门弹窗
   const menuRef = useRef<{
-    openMoal: (type: IAction, data?: Menu.MenuItem | { parentId: string }) => void
+    openMoal: (type: IAction, data?: Menu.EditParams | { parentId?: string ,orderBy?: number }) => void
   }>()
   // 获取部门列表
   const getMenuListData = async () => {
@@ -105,21 +119,26 @@ export default function MenuList() {
   
     getMenuListData()
   }, [])
-  // 创建部门
+  // 创建菜单
   const handeCreate = () => {
-    menuRef.current?.openMoal('create')
+    menuRef.current?.openMoal('create',{orderBy:deptList.length})
   }
-  // 创建子部门
-  const handeSubCreact = (id: string) => {
-    menuRef.current?.openMoal('create', { parentId: id })
+  // 创建菜单
+  const handeSubCreact = (id: string,orderBy:number) => {
+    menuRef.current?.openMoal('create', { parentId: id,orderBy })
   }
   // 删除部门
-  const handleDelete = (id: string) => {
+  const handleDelete = (MenuItem: Menu.MenuItem) => {
+    const tip:string={
+      1:'菜单',
+      2:'按钮',
+      3:'页面'
+    }[MenuItem.menuType]
     Modal.confirm({
-      title: '删除部门',
-      content: '确定删除该部门吗？',
+      title: '删除'+tip,
+      content: '确定删除该'+tip+'吗？',
       onOk: async () => {
-        await deleteDept({ _id: id })
+        await deleteMenu({ _id: MenuItem._id })
         message.success('删除成功')
         getMenuListData()
       }
@@ -139,7 +158,7 @@ export default function MenuList() {
             </Form.Item>
           </Col>
           <Col span={3}>
-            <Form.Item label='状态' name='state'>
+            <Form.Item label='状态' name='menuState'>
               <Select placeholder='请选择状态' allowClear>
                 <Select.Option value='1'>正常</Select.Option>
                 <Select.Option value='2'>停用</Select.Option>

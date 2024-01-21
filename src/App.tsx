@@ -7,15 +7,17 @@
  * @Description:
  */
 
-// import { RouterProvider, BrowserRouter, HashRouter } from 'react-router-dom'
+import { RouterProvider, BrowserRouter } from 'react-router-dom'
 import { HashRouter } from 'react-router-dom'
 // 改变主题
 // App as AntdApp 为了处理message在ConfigProvider下控制台报错
 import { ConfigProvider, App as AntdApp } from 'antd'
 
 // 路由方式一
-// import router from './router/index'
-import Router from './router/index'
+import router from './router/index'
+
+// 路由方式二
+// import Router from './router/index'
 import './App.less'
 // 处理message
 import AntdGlobal from './utils/AntdGlobal'
@@ -36,9 +38,13 @@ function App() {
     >
       <AntdApp>
         <AntdGlobal />
-        <HashRouter>
+        {/* 路由方式2 */}
+        {/* <HashRouter>
           <Router></Router>
-        </HashRouter>
+        </HashRouter> */}
+        {/* 路由方式1 */}
+        <RouterProvider router={router}></RouterProvider>
+
       </AntdApp>
     </ConfigProvider>
   )

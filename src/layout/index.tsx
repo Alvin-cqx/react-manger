@@ -10,7 +10,8 @@ import React, { useEffect } from 'react'
 
 import { Layout, theme } from 'antd'
 import { Watermark } from 'antd'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useRouteLoaderData } from 'react-router-dom'
+
 const { Content, Sider } = Layout
 import NavHeader from '@/components/NavHeader'
 import NavFooter from '@/components/NavFooter'
@@ -41,7 +42,13 @@ const App: React.FC = () => {
 
     // 使用zustand存进去store
     updateUserInfo(res)
+
+
   }
+
+  // 获取加载路由前hook的权限,路由加上id，加载这组件前会优先加载这个方法
+ const data = useRouteLoaderData('layout_id')
+ console.log(data,'data')
   return (
     <Watermark content='陈庆贤'>
       <Layout>

@@ -8,7 +8,7 @@
  */
 /* eslint-disable react-refresh/only-export-components */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { createHashRouter, Navigate, useRoutes } from 'react-router-dom'
+import { createHashRouter, Navigate, useRoutes,createBrowserRouter } from 'react-router-dom'
 import Welcome from '@/views/welcome/index'
 import Login from '@/views/login/Login'
 import Error404 from '@/views/Error404'
@@ -18,6 +18,7 @@ import User from '@/views/system/user'
 import DeptList from '@/views/system/dept'
 import MenuList from '@/views/system/menu'
 import Layout from '@/layout'
+import AuthLoader from './AuthLoader'
 const router = [
   {
     path: '/',
@@ -28,7 +29,10 @@ const router = [
   //   element: <Welcome />
   // },
   {
+    id:'layout_id',
     element: <Layout />,
+
+    loader: AuthLoader,
     children: [
       {
         path: '/welcome',
@@ -69,9 +73,12 @@ const router = [
     element: <Error403 />
   }
 ]
+
 // 路由方式二
-export default function Router() {
-  return useRoutes(router)
-}
+// export default function Router() {
+//   return useRoutes(router)
+// }
+//export default router
 // 路由方式一
-// export default createHashRouter(router)
+export default createHashRouter(router)
+
