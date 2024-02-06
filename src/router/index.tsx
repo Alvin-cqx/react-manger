@@ -17,9 +17,10 @@ import Dashboard from '@/views/dashboard'
 import User from '@/views/system/user'
 import DeptList from '@/views/system/dept'
 import MenuList from '@/views/system/menu'
+import RoleList from '@/views/system/role'
 import Layout from '@/layout'
 import AuthLoader from './AuthLoader'
-const router = [
+export const router = [
   {
     path: '/',
     element: <Navigate to='/welcome'></Navigate>
@@ -52,7 +53,14 @@ const router = [
       },
       {
         path: '/menuList',
-        element: <MenuList />
+        element: <MenuList />,
+        meta:{ 
+          auth:false
+        }
+      },
+      {
+        path: '/roleList',
+        element: <RoleList />
       }
     ]
   },

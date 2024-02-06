@@ -50,10 +50,16 @@ const NavHeader = () => {
   const dropClick: MenuProps['onClick'] = ({ key }) => {
     console.log(key)
     if (key === 'layout') {
-      storage.clearStorage()
-      message.success('退出成功!')
-      // hash路由模式要加#
-      window.location.href = '#/login?callback=' + encodeURIComponent(location.href)
+      let url = location.href
+      if (url.includes('#')) {
+        const indexOfHash = url.indexOf('#')
+        let link = url.substring(indexOfHash + 1)
+        console.log(link, 'link')
+        storage.clearStorage()
+        message.success('退出成功!')
+        // hash路由模式要加#
+        window.location.href = '#/login?callback=' + link
+      }
     }
   }
   // 菜单图标伸缩

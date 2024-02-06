@@ -7,9 +7,10 @@
  * @Description:
  */
 import { MutableRefObject } from 'react'
-import { FormInstance } from 'antd'
 //   const uesrRef=useRef() 看到是MutableRefObject类型
-import { User, FormItem, Dept, Menu } from './api'
+import { FormInstance } from 'antd'
+
+import { User, FormItem, Dept, Menu ,Role} from './api'
 export type IAction = 'create' | 'edit' | 'delete'
 // 创建用户弹窗
 export interface IModalProps {
@@ -28,8 +29,12 @@ export interface CreateMenuProps {
   update: () => void
 }
 
-
-// refProps类型
+// 角色弹窗
+export interface roleProps{
+  roleRef: MutableRefObject<{ openMoal: (type?: IAction, data?: Role.EditParams) => void } | undefined>
+  update: () => void
+}
+// refProps类型 提取公共类型
 export interface refProps<T=Menu.MenuItem> {
   menuRef: MutableRefObject<{ openMoal: (type: IAction, data?:T) => void } | undefined>
   update: () => void
@@ -48,3 +53,5 @@ export interface FormProps {
   getFormData_: (val: FormItem.UserFormItem, form?: any) => void
   setFormData_: (val: FormItem.UserFormItem, form?: any) => void
 }
+
+

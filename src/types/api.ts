@@ -178,7 +178,8 @@ export namespace Menu {
     path?: string
     component?: string
     creatTime?: string
-    orderBy?:number
+    orderBy?:number,
+    
   }
   // 菜单对象
   export interface MenuItem extends CreateParams {
@@ -193,5 +194,37 @@ export namespace Menu {
 
   export interface DelParams{
     _id:string
+  }
+}
+
+
+// 角色
+export namespace Role {
+  // 搜索参数
+  export interface Params extends PageParams {
+    roleName?: string
+  }
+  export interface CreateParams {
+    roleName: string
+    remark: string
+  }
+  export interface EditParams extends CreateParams {
+    _id: string
+  }
+  export interface RoleItem extends CreateParams {
+    _id: string
+    permissionList: {
+      checkedKeys: string[]
+      halfCheckedKeys: string[]
+    }
+    updateTime: string
+    createTime: string
+  }
+  export interface CreatePermission {
+    _id: string
+    permissionList: {
+      checkedKeys: string[]
+      halfCheckedKeys: string[]
+    }
   }
 }

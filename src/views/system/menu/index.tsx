@@ -6,6 +6,7 @@ import { Dept, Menu } from '@/types/api'
 import CreateMenu from './CreateMenu'
 import { IAction } from '@/types/modal'
 import { ColumnsType } from 'antd/es/table'
+import AuthButton from '@/utils/AuthButton'
 export default function MenuList() {
   const [form] = useForm()
   const [deptList, setDeptList] = useState<Menu.MenuItem[]>([])
@@ -181,9 +182,10 @@ export default function MenuList() {
         <div className='header-wrapper'>
           <div className='tilte'>菜单列表</div>
           <div className='action'>
-            <Button type='primary' onClick={handeCreate}>
+            {/* <Button type='primary' onClick={handeCreate}>
               新增
-            </Button>
+            </Button> */}
+            <AuthButton auth='menu@create' type='primary' onClick={handeCreate}>新增</AuthButton>
           </div>
         </div>
         <Table bordered rowKey={'_id'} columns={columns} dataSource={deptList} pagination={false}></Table>

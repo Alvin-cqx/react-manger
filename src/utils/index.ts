@@ -2,7 +2,7 @@
  * 工具函数封装
  */
 
-// import { Menu } from '@/types/api'
+import { Menu } from '@/types/api'
 
 // 格式化金额
 export const formatMoney = (num?: number | string) => {
@@ -62,11 +62,11 @@ export const formatState = (state: number) => {
 }
 
 // 获取页面路径
-// export const getMenuPath = (list: Menu.MenuItem[]): string[] => {
-//   return list.reduce((result: string[], item: Menu.MenuItem) => {
-//     return result.concat(Array.isArray(item.children) && !item.buttons ? getMenuPath(item.children) : item.path + '')
-//   }, [])
-// }
+export const getMenuPath = (list: Menu.MenuItem[]): string[] => {
+  return list.reduce((result: string[], item: Menu.MenuItem) => {
+    return result.concat(Array.isArray(item.children) && !item.buttons ? getMenuPath(item.children) : item.path + '')
+  }, [])
+}
 
 // 递归获取路由对象
 

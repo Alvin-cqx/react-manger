@@ -4,7 +4,7 @@ import { FormItem } from '@/types/api'
 import { FormProps } from '@/types/modal'
 
 export const Myform = (props: FormProps) => {
-  console.log('myform')
+
   const [form] = Form.useForm()
   // 设置表单默认数据
   const [initialValues, setInitialValues] = useState<FormItem.UserFormItem>(props.searchItem as FormItem.UserFormItem)

@@ -40,7 +40,8 @@ export default function LoginFc() {
       // 为了登录返回上次退出的页面，window.location.href会刷新页面导致状态管理数据失效
       if (window.location.href.includes('callback')) {
         const strList = window.location.href?.split('callback=') as string[]
-        window.location.href = strList[strList?.length - 1] || '/'
+        window.location.href='/#'+strList[strList?.length - 1]
+        // window.location.href = strList[strList?.length - 1] || '/'
       } else {
         window.location.href = '/'
       }

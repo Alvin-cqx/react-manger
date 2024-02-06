@@ -7,7 +7,7 @@
  * @Description:
  */
 import request from '@/utils/request'
-import { Login, User, DashboardType, ResultData, Dept, Menu } from '@/types/api'
+import { Login, User, DashboardType, ResultData, Dept, Menu, Role } from '@/types/api'
 // 登录
 export const login = (params: Login.params) => {
   return request.post<string>('/users/login', params)
@@ -96,5 +96,31 @@ export const deleteMenu = (params: Menu.DelParams) => {
 
 // // 获取用户权限列表
 export const getPermissionList = () => {
-  return request.get<{ buttonList: string[]; menuList: Menu.MenuItem }>('/users/getPermissionList')
+  return request.get<{ buttonList: string[]; menuList: Menu.MenuItem[] }>('/users/getPermissionList')
+}
+
+// 获取角色列表
+export const getRoleList = (params?: Role.Params) => {
+  return request.get<ResultData<Role.RoleItem>>('/roles/list', params)
+}
+
+// 创建角色
+export const createRole = (params: Role.CreateParams) => {
+  return request.post('/roles/create', params)
+}
+// 修改角色
+export const editRole = (params: Role.EditParams) => {
+  return request.post('/roles/edit', params)
+}
+// 删除角色
+export const delRoleById = (params: { _id: string }) => {
+  return request.post('/roles/delete', params)
+}
+// 更新权限
+export const updatePermission = (params: Role.CreatePermission) => {
+  return request.post('/roles/update/permission', params)
+}
+// 获取所有角色
+export const getRoleAllList = () => {
+  return request.get<Role.RoleItem[]>('/roles/allList', {})
 }

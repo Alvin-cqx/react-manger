@@ -30,7 +30,7 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = 'Bearer ' + token
     }
-    config.headers.icode = 'A75444C95AABD976'
+    config.headers.icode = '60B11C9C29AE4B3D'
     // 用来更换测试，开发环境
     console.log(env, 'envenvenv')
     return {
