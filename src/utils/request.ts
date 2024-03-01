@@ -30,7 +30,7 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = 'Bearer ' + token
     }
-    config.headers.icode = '60B11C9C29AE4B3D'
+    config.headers.icode = 'F69460029755E8C8'
     // 用来更换测试，开发环境
     console.log(env, 'envenvenv')
     return {
@@ -47,6 +47,10 @@ instance.interceptors.response.use(
   response => {
     const data: Result = response.data
     // hideLoading()
+
+    // 对于文件下载的处理
+    if (response.config.responseType === 'blob') return response
+
     if (data.code === 500001) {
       if (!isRefreshing) {
         isRefreshing = true
@@ -91,5 +95,25 @@ export default {
   },
   post<T>(url: string, params?: object, options: IConfig = { showLoading: false, errorLoading: true }): Promise<T> {
     return instance.post(url, params, options)
+  },
+  downloadFile(url: string, data: any, fileName = 'fileName.xlsx') {
+    instance({
+      url,
+      data,
+      method: 'post',
+      responseType: 'blob'
+    }).then(res => {
+      const blob = new Blob([res.data], {
+        type: res.data.type
+      })
+      const name = (res.headers['file-name'] as string) || fileName
+      const link = document.createElement('a')
+      link.download = decodeURIComponent(name)
+      link.href = URL.createObjectURL(blob)
+      document.body.append(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(link.href)
+    })
   }
 }

@@ -18,7 +18,7 @@ import { getReportData, getLineData, getPieCityData, getPieAgeData, getRadarData
 import { DashboardType } from '@/types/api'
 import { formatNum } from '@/utils'
 import { useCharts } from '@/hook/useCharts'
-const Dashboard: React.FC = () => {
+export default function Dashboard() {
   // 获取用户信息
   const userInfo = useStore(state => state.userInfo)
   const items: DescriptionsProps['items'] = [
@@ -458,4 +458,4 @@ const Dashboard: React.FC = () => {
     </div>
   )
 }
-export default Dashboard
+// export default Dashboard

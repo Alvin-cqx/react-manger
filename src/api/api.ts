@@ -7,7 +7,7 @@
  * @Description:
  */
 import request from '@/utils/request'
-import { Login, User, DashboardType, ResultData, Dept, Menu, Role } from '@/types/api'
+import { Login, User, DashboardType, ResultData, Dept, Menu, Role, OrderType } from '@/types/api'
 // 登录
 export const login = (params: Login.params) => {
   return request.post<string>('/users/login', params)
@@ -124,3 +124,33 @@ export const updatePermission = (params: Role.CreatePermission) => {
 export const getRoleAllList = () => {
   return request.get<Role.RoleItem[]>('/roles/allList', {})
 }
+// 获取订单列表
+export const getOrderList = (params: OrderType.Params) => {
+  return request.get<OrderType.OrderData<OrderType.OrderItem>>('/order/list', params)
+}
+
+// 获取车型列表
+export const getVehicleList = () => {
+  return request.get<OrderType.DictItem[]>('/order/vehicleList')
+}
+// 获取城市列表
+export const getCityList = () => {
+  return request.get<OrderType.DictItem[]>('/order/cityList')
+}
+// 创建订单
+export const createOrder = (params: OrderType.OrderItem) => {
+  return request.post('/order/create', params)
+}
+// 查询订单详情
+export const getOrderDetail = (orderId: string) => {
+  return request.get<OrderType.OrderItem>(`/order/detail/${orderId}`)
+}
+// 删除订单
+export const deleteOrder = (params: { _id: string }) => {
+  return request.post('/order/delete', params)
+}
+
+  // 文件流导出
+  export const  orderExport =(data: OrderType.OrderSearchParams) =>{
+    request.downloadFile('/order/orderExport', data)
+  }

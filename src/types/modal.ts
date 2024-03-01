@@ -28,17 +28,27 @@ export interface CreateMenuProps {
   menuRef: MutableRefObject<{ openMoal: (type: IAction, data?: Menu.MenuItem) => void } | undefined>
   update: () => void
 }
-
+// 订单弹窗
+export interface OrderProps {
+  orderRef: MutableRefObject<{ openMoal: () => void } | undefined>
+  update: () => void
+}
+// 订单详情弹窗
+export interface OrderDetailProps {
+  orderDetailRef: MutableRefObject<{ openMoal: (orderId:string) => void } | undefined>
+}
 // 角色弹窗
 export interface roleProps{
   roleRef: MutableRefObject<{ openMoal: (type?: IAction, data?: Role.EditParams) => void } | undefined>
   update: () => void
 }
-// refProps类型 提取公共类型
+// refProps类型 提取公共类型   
 export interface refProps<T=Menu.MenuItem> {
   menuRef: MutableRefObject<{ openMoal: (type: IAction, data?:T) => void } | undefined>
   update: () => void
 }
+
+
 interface myformRefPorps {
   setFormData: (data: FormItem.UserFormItem) => void
   getFieldsForm: FormInstance<any>

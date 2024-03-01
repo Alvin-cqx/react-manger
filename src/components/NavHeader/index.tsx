@@ -7,7 +7,7 @@
  * @Description:
  */
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Breadcrumb, Dropdown, Switch, App } from 'antd'
+import { Dropdown, Switch, App } from 'antd'
 import type { MenuProps } from 'antd'
 import styles from './index.module.less'
 // 使用 resso
@@ -16,6 +16,7 @@ import store from '@/store/resso'
 import useStore from '@/store/zustand'
 import storage from '@/utils/storage'
 import { User } from '@/types/api'
+import BreadCrumb from './BreadCrumb'
 const NavHeader = () => {
   // 处理消息提示报错
   const { message } = App.useApp()
@@ -72,7 +73,8 @@ const NavHeader = () => {
         <div onClick={changeCollapsed} style={{ cursor: 'pointer' }}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </div>
-        <Breadcrumb
+        <BreadCrumb></BreadCrumb>
+        {/* <Breadcrumb
           style={{ marginLeft: 10 }}
           items={[
             {
@@ -88,7 +90,7 @@ const NavHeader = () => {
               title: 'An Application'
             }
           ]}
-        />
+        /> */}
       </div>
       <div className='right'>
         <Switch checkedChildren='暗黑' unCheckedChildren='默认' style={{ marginRight: 10 }}></Switch>

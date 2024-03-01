@@ -8,18 +8,23 @@
  */
 /* eslint-disable react-refresh/only-export-components */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { createHashRouter, Navigate, useRoutes,createBrowserRouter } from 'react-router-dom'
-import Welcome from '@/views/welcome/index'
+import { createHashRouter, Navigate, useRoutes, createBrowserRouter } from 'react-router-dom'
+import React, { Suspense } from 'react'
+// import Welcome from '@/views/welcome/index'
 import Login from '@/views/login/Login'
 import Error404 from '@/views/Error404'
 import Error403 from '@/views/Error403'
-import Dashboard from '@/views/dashboard'
-import User from '@/views/system/user'
-import DeptList from '@/views/system/dept'
-import MenuList from '@/views/system/menu'
-import RoleList from '@/views/system/role'
+// import Dashboard from '@/views/dashboard'
+// import User from '@/views/system/user'
+// import DeptList from '@/views/system/dept'
+// import MenuList from '@/views/system/menu'
+// import RoleList from '@/views/system/role'
+// import OrderList from '@/views/order/OrderList'
 import Layout from '@/layout'
 import AuthLoader from './AuthLoader'
+
+// 路由懒加载
+import { LazyLoad } from './LazyLoad'
 export const router = [
   {
     path: '/',
@@ -30,37 +35,41 @@ export const router = [
   //   element: <Welcome />
   // },
   {
-    id:'layout_id',
+    id: 'layout_id',
     element: <Layout />,
 
     loader: AuthLoader,
     children: [
       {
         path: '/welcome',
-        element: <Welcome />
+        element: LazyLoad(React.lazy(() => import('@/views/welcome/index')))
       },
       {
         path: '/dashboard',
-        element: <Dashboard />
+        element: LazyLoad(React.lazy(() => import('@/views/dashboard')))
       },
       {
         path: '/userList',
-        element: <User />
+        element: LazyLoad(React.lazy(() => import('@/views/system/user')))
       },
       {
         path: '/deptList',
-        element: <DeptList />
+        element: LazyLoad(React.lazy(() => import('@/views/system/dept')))
       },
       {
         path: '/menuList',
-        element: <MenuList />,
-        meta:{ 
-          auth:false
+        element: LazyLoad(React.lazy(() => import('@/views/system/menu'))),
+        meta: {
+          auth: false
         }
       },
       {
         path: '/roleList',
-        element: <RoleList />
+        element: LazyLoad(React.lazy(() => import('@/views/system/role')))
+      },
+      {
+        path: '/orderList',
+        element: LazyLoad(React.lazy(() => import('@/views/order/OrderList')))
       }
     ]
   },
@@ -89,4 +98,3 @@ export const router = [
 //export default router
 // 路由方式一
 export default createHashRouter(router)
-
