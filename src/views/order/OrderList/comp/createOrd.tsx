@@ -171,7 +171,7 @@ export default function CreateOrder(props: OrderProps) {
                   <Select.Option value={3}>超时</Select.Option>
                   <Select.Option value={4}>取消</Select.Option>
                 </Select>
-              </Form.Item>
+              </Form.Item> 
             </Col>
           </Row>
           <Row>

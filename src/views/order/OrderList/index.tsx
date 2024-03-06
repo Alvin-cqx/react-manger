@@ -5,6 +5,7 @@ import { ColumnsType } from 'antd/es/table'
 import { OrderType } from '@/types/api'
 import { getOrderList, deleteOrder, orderExport } from '@/api/api'
 import CreateOrder from './comp/createOrd'
+import CreateOrdComp from './comp/createOrdComp'
 import OrderDetail from './comp/orderDetail'
 export default function OrderList() {
   const [form] = useForm()
@@ -221,7 +222,7 @@ export default function OrderList() {
       </div>
 
       {/* 创建角色 */}
-      <CreateOrder orderRef={orderRef} update={resetDeptList}></CreateOrder>
+      <CreateOrdComp orderRef={orderRef} update={resetDeptList}></CreateOrdComp>
       {/* 设置权限 */}
       <OrderDetail orderDetailRef={orderDetailRef}></OrderDetail>
     </div>

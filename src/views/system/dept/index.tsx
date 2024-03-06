@@ -6,6 +6,7 @@ import { Dept } from '@/types/api'
 import CreateDept from './CreateDept'
 import { IAction } from '@/types/modal'
 import { ColumnsType } from 'antd/es/table'
+import SearchForm from '@/components/SearchForm'
 export default function DeptList() {
   const [form] = useForm()
   const [deptList, setDeptList] = useState<Dept.DeptItem[]>([])
@@ -138,6 +139,7 @@ export default function DeptList() {
           </Col>
         </Row>
       </Form>
+     
       <div className='base-table'>
         <div className='header-wrapper'>
           <div className='tilte'>部门列表</div>
